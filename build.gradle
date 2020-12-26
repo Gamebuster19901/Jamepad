@@ -38,10 +38,10 @@ task dist(dependsOn: classes, type: Jar) {
     org.gradle.util.VersionNumber gradleVersion = org.gradle.util.VersionNumber.parse(project.getGradle().getGradleVersion())
     org.gradle.util.VersionNumber sourceSetChangeVersion = org.gradle.util.VersionNumber.parse("5.0");
     if(gradleVersion > sourceSetChangeVersion) {
-        from files(sourceSets.main.output.classesDir)
+        from files(sourceSets.main.output.classesDirs)
     }
     else {
-        from files(sourceSets.main.output.classesDirs)
+        from files(sourceSets.main.output.classesDir)
     }
     from files(sourceSets.main.output.resourcesDir)
     from {configurations.compile.collect {zipTree(it)}}
