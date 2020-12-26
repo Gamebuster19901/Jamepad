@@ -33,7 +33,7 @@ task runTester(dependsOn: classes, type: JavaExec) {
     standardInput = System.in
 }
 
-
+build dependsOn dist
 task dist(dependsOn: classes, type: Jar) {
     org.gradle.util.VersionNumber gradleVersion = org.gradle.util.VersionNumber.parse(project.getGradle().getGradleVersion())
     org.gradle.util.VersionNumber sourceSetChangeVersion = org.gradle.util.VersionNumber.parse("5.0");
