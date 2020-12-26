@@ -35,8 +35,9 @@ task runTester(dependsOn: classes, type: JavaExec) {
 
 
 task dist(dependsOn: classes, type: Jar) {
-    DefaultArtifactVersion gradleVersion = new DefaultArtifactVersion(project.getGradle().getGradleVersion())
-    if(GradleVersion.compareTo(new DefaultArtifactVersion("5.0")) < 1) {
+    VersionNumber gradleVersion = VersionNumber.parse(project.getGradle().getGradleVersion())
+    VersionNumber sourceSetChangeVersion = VersionNumber.parse("5.0");
+    if(gradleVersion > sourceSetChangeVersion) {
         from files(sourceSets.main.output.classesDir)
     }
     else {
