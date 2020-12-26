@@ -35,7 +35,13 @@ task runTester(dependsOn: classes, type: JavaExec) {
 
 
 task dist(dependsOn: classes, type: Jar) {
-    from files(sourceSets.main.output.classesDir)
+    DefaultArtifactVersion gradleVersion = new DefaultArtifactVersion(project.getGradle().getGradleVersion())
+    if(GradleVersion.compareTo(new DefaultArtifactVersion("5.0")) < 1) {
+        from files(sourceSets.main.output.classesDir)
+    }
+    else {
+        from files(sourceSets.main.output.classesDirs)
+    }
     from files(sourceSets.main.output.resourcesDir)
     from {configurations.compile.collect {zipTree(it)}}
 
