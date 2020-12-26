@@ -33,7 +33,6 @@ task runTester(dependsOn: classes, type: JavaExec) {
     standardInput = System.in
 }
 
-build.dependsOn dist
 task dist(dependsOn: classes, type: Jar) {
     org.gradle.util.VersionNumber gradleVersion = org.gradle.util.VersionNumber.parse(project.getGradle().getGradleVersion())
     org.gradle.util.VersionNumber sourceSetChangeVersion = org.gradle.util.VersionNumber.parse("5.0");
@@ -50,6 +49,7 @@ task dist(dependsOn: classes, type: Jar) {
         attributes 'Main-Class': 'com.studiohartman.jamepad.tester.ControllerTester'
     }
 }
+build.dependsOn dist
 
 task sourcesJar(type: Jar, dependsOn: classes) {
     classifier = 'sources'
